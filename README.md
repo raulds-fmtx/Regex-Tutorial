@@ -54,19 +54,114 @@ This regex ensures that an email address has the correct structure, including a 
 
 ### Anchors
 
+Anchors are used to match positions in a string, such as the start or end/
+
+- `^`: Matches the start of the string.
+- `$`: Matches the end of the string.
+
+In our regex, `^` ensures that the string starts with the pattern, and `$` ensures that it ends with the pattern.
+
 ### Quantifiers
+
+Quantifiers specify how many times an element can occur.
+
+- `*`: Matches 0 or more of the preceding element.
+- `+`: Matches 1 or more of the preceding element.
+- `?`: Matches 0 or 1 of the preceding element.
+- `{n}`: Matches exactly n of the preceding element.
+- `{n,}`: Matches n or more of the preceding element.
+- `{n,m}`: Matches between n and m of the preceding element.
+  
+In our regex:
+
+- `+` after `[a-z0-9_\.-]` means the local part of the email must have one or more characters.
+- `{2,6}` after `[a-z\.]` means the TLD must be between 2 and 6 characters long.
 
 ### Grouping Constructs
 
+Grouping constructs group multiple tokens together and capture parts of the string.
+
+- `()`: Capturing groups.
+
+In our regex:
+
+- `([a-z0-9_\.-]+)` captures the local part of the email.
+- `([\da-z\.-]+)` captures the domain name.
+- `([a-z\.]{2,6})` captures the TLD.
+
 ### Bracket Expressions
+
+Bracket expressions (character classes) match any one of the enclosed characters.
+
+- `[a-z0-9_\.-]`: Matches any lowercase letter, digit, underscore, dot, or hyphen.
+- `[\da-z\.-]`: Matches any digit, lowercase letter, dot, or hyphen.
+- `[a-z\.]`: Matches any lowercase letter or dot.
 
 ### Character Classes
 
+Character classes define a set of characters to match.
+
+- `\d`: Matches any digit (equivalent to [0-9]).
+- `\w`: Matches any word character (equivalent to [a-zA-Z0-9_]).
+- `\s`: Matches any whitespace character (equivalent to [ \t\n\r\f\v]).
+- `\D`: Matches any non-digit.
+- `\W`: Matches any non-word character.
+- `\S`: Matches any non-whitespace character.
+
+In our regex:
+
+- `[\da-z\.-]` uses \d to include digits.
+
 ### The OR Operator
+
+The OR operator (`|`) matches either the expression before or the expression after it.
+
+Example:
+
+```regex
+cat|dog
+```
+
+This regex matches either "cat" or "dog".
 
 ### Flags
 
+Flags modify the behavior of the regex. Common flags include:
+
+- `i`: Case-insensitive matching.
+- `g`: Global matching.
+- `m`: Multiline matching.
+- `s`: Dot matches newline characters.
+- `u`: Unicode matching.
+- `y`: Sticky matching.
+
+Example:
+
+```regex
+/hello/i
+```
+
+This regex matches "hello" in a case-insensitive manner, so it would match "Hello", "HELLO", "heLLo", etc.
+
+```regex
+/foo/g
+```
+
+This regex finds all matches of "foo" in the string, not just the first one.
+
+```regex
+/^abc/m
+```
+
+With the `m` flag, this regex matches "abc" at the start of each line in a multi-line string, not just the start of the entire string.
+
 ### Character Escapes
+
+Character escapes allow matching characters that have special meanings in regex.
+
+- `\.`: Matches a literal dot.
+
+In our regex, `\.` is used to match the dots in the domain and TLD parts.
 
 ## Author
 
